@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wrx.xing.mapper.HospitalMapper">
+
+    <sql id="SQL_COLUMN">
+        pk_id,hospital_name,address,phone,grade
+    </sql>
+
+    <insert id="insert" parameterType="wrx.xing.domain.Hospital" useGeneratedKeys="true" keyProperty="pkId">
+        insert into hospital(
+          hospital_name,address,phone,grade
+        )values (
+          #{hospitalName},#{address},#{phone},#{grade}
+        )
+    </insert>
+    <select id="getHospitalByGrade" resultType="wrx.xing.domain.Hospital">
+        select <include refid="SQL_COLUMN"/> from hospital
+        where grade > #{grade}
+    </select>
+</mapper>
